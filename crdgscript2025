@@ -1,5 +1,6 @@
 local tweenservice = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
+local rielhi
 
 function randomString()
 	local length = math.random(10,20)
@@ -470,36 +471,36 @@ local loaddex = misctab:CreateButton({
    end,
 })
 
-if game.PlaceId = 10005552275 then
+if game.PlaceId == 10005552275 then
 	local rieltab = Window:CreateTab("riel", "frown")
-   local rielmainsection = qrottab:CreateSection("main")
+   local rielmainsection = rieltab:CreateSection("main")
    local Divider = rieltab:CreateDivider()
 
    local tpbutton = rieltab:CreateButton({
      Name = "teleport to riel",
      Callback = function()
-         game.Players.LocalPlayer.Character:PivotTo(workspace.Boss.RIEL.PrimaryPart.CFrame) 
+         game.Players.LocalPlayer.Character:PivotTo(workspace.Boss.REIL.PrimaryPart.CFrame) 
       end,
    })
 
 local rieltoggle = rieltab:CreateToggle({
    Name = "auto kill",
    CurrentValue = false,
-   Flag = "rielautokill", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Flag = "reilautokill", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(Value)
-  if Value == true
-		local hi; = runserv.RenderStepped:Connect(function(dt)
-game.Players.LocalPlayer.Character:PivotTo(workspace.Boss.RIEL.PrimaryPart.CFrame + workspace.Boss.RIEL.PrimaryPart.CFrame.UpVector * -5) 
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, workspace.Boss.RIEL.PrimaryPart.Position)
+  if Value == true then
+   rielhi = RunService.RenderStepped:Connect(function(dt)
+game.Players.LocalPlayer.Character:PivotTo(workspace.Boss.REIL.PrimaryPart.CFrame + workspace.Boss.REIL.PrimaryPart.CFrame.LookVector * -3) 
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, workspace.Boss.REIL.PrimaryPart.Position)
 local args = {
 	false
 }
 game:GetService("Players").LocalPlayer.Character:WaitForChild(""):WaitForChild("attack"):FireServer(unpack(args))
 
 end)
+      else
+      rielhi:Disconnect()
 	end
-else
-hi:Disconnect()
    end,
 })
 end
