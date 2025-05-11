@@ -472,12 +472,21 @@ local musicgetrid = rieltab:CreateButton({
       end,
    })
 
+local soundlounder = rieltab:CreateButton({
+     Name = "make dmg sound louder",
+     Callback = function()
+          game.ReplicatedStorage.hitsound.Volume = 10
+      end,
+   })
+
    local tpbutton = rieltab:CreateButton({
      Name = "teleport to riel",
      Callback = function()
          game.Players.LocalPlayer.Character:PivotTo(workspace.Boss.REIL.PrimaryPart.CFrame) 
       end,
    })
+
+
 
 local rieltoggle = rieltab:CreateToggle({
    Name = "auto kill",
