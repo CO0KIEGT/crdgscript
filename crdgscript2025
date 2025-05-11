@@ -473,6 +473,7 @@ local rieltoggle = rieltab:CreateToggle({
    Flag = "reilautokill", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(Value)
   if Value == true then
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
    rielhi = RunService.RenderStepped:Connect(function(dt)
 game.Players.LocalPlayer.Character:PivotTo(workspace.Boss.REIL.PrimaryPart.CFrame + workspace.Boss.REIL.PrimaryPart.CFrame.UpVector * 3) 
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, workspace.Boss.REIL.PrimaryPart.Position)
@@ -483,6 +484,7 @@ game:GetService("Players").LocalPlayer.Character:WaitForChild(""):WaitForChild("
 
 end)
       else
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
       rielhi:Disconnect()
 	end
    end,
