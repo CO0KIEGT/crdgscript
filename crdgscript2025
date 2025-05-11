@@ -1,0 +1,479 @@
+local tweenservice = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+
+function randomString()
+	local length = math.random(10,20)
+	local array = {}
+	for i = 1, length do
+		array[i] = string.char(math.random(32, 126))
+	end
+	return table.concat(array)
+end
+
+function getRoot(char)
+	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
+	return rootPart
+end
+
+floatName = randomString()
+function float(char)    
+task.spawn(function()
+			local Float = Instance.new('Part')
+			Float.Name = floatName
+			Float.Parent = char
+			Float.Transparency = 1
+			Float.Size = Vector3.new(2,0.2,1.5)
+			Float.Anchored = true
+			local FloatValue = -3.1
+			Float.CFrame = getRoot(char).CFrame * CFrame.new(0,FloatValue,0)
+			
+			floatDied = char:FindFirstChildOfClass('Humanoid').Died:Connect(function()
+				FloatingFunc:Disconnect()
+				Float:Destroy()
+				floatDied:Disconnect()
+			end)
+			local function FloatPadLoop()
+				if char:FindFirstChild(floatName) and getRoot(char) then
+					Float.CFrame = getRoot(char).CFrame * CFrame.new(0,FloatValue,0)
+				else
+					FloatingFunc:Disconnect()
+					Float:Destroy()
+					floatDied:Disconnect()
+				end
+			end			
+			FloatingFunc = RunService.Heartbeat:Connect(FloatPadLoop)
+		end)
+end
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local Window = Rayfield:CreateWindow({
+   Name = "crdg script 2025",
+   Icon = 107584140236700, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "crdg script 2025",
+   LoadingSubtitle = "by kooc",
+   Theme = "Amethyst", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+   DisableRayfieldPrompts = true,
+   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = crdgscriptfolder, -- Create a custom folder for your hub/game
+      FileName = "crdgscriptconfig"
+   },
+
+   Discord = {
+      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+   
+})
+--main game
+if game.PlaceId == 7715234692 then
+   local maintab = Window:CreateTab("main", "smile")
+   local mainmainsection = maintab:CreateSection("main")
+   local Divider = maintab:CreateDivider()
+   local Label = maintab:CreateLabel("if you're teleporting or doing anything, wait for it to finish until doing something else","siren")
+   
+   local autobeatgame = maintab:CreateButton({
+   Name = "complete game",
+   Callback = function()
+
+       local screengui = Instance.new("ScreenGui")
+      screengui.Name = randomString()
+      screengui.Parent = game.Players.LocalPlayer.PlayerGui
+      screengui.ResetOnSpawn = false
+      screengui.IgnoreGuiInset = true
+      local frame = Instance.new("Frame")
+      frame.Parent = screengui
+      frame.Size = UDim2.new(1,0,1,0)
+      frame.BackgroundColor3 = Color3.fromRGB(0, 0,0)
+      local textlabel = Instance.new("TextLabel")
+      textlabel.Parent = frame
+      textlabel.Text = "please sit tight while the script completes the game for you, you will get updates in the bottom right corner."
+      textlabel.TextColor3 = Color3.fromRGB(255,255,255)
+      textlabel.Position = UDim2.new(0.5,0,0.4,0)
+      textlabel.TextSize = 12
+      local textlab = Instance.new("TextLabel")
+      textlab.Parent = frame
+      textlab.Text = "this will take 2-3 minutes."
+      textlab.TextColor3 = Color3.fromRGB(255,255,255)
+      textlab.Position = UDim2.new(0.5,0,0.5,0)
+      textlab.TextSize = 12
+
+      local plates = Instance.new("TextLabel")
+      plates.Parent = frame
+      plates.Text = "plates: 0"
+      plates.TextColor3 = Color3.fromRGB(255,255,255)
+      plates.Position = UDim2.new(0.5,0,0.6,0)
+      plates.TextSize = 8
+
+      local minitrigs = Instance.new("TextLabel")
+      minitrigs.Parent = frame
+      minitrigs.Text = "minitriggers: 0"
+      minitrigs.TextColor3 = Color3.fromRGB(255,255,255)
+      minitrigs.Position = UDim2.new(0.5,0,0.65,0)
+      minitrigs.TextSize = 8
+
+      local checkpoints = Instance.new("TextLabel")
+      checkpoints.Parent = frame
+      checkpoints.Text = "checkpoints: 0"
+      checkpoints.TextColor3 = Color3.fromRGB(255,255,255)
+      checkpoints.Position = UDim2.new(0.5,0,0.7,0)
+      checkpoints.TextSize = 8
+
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+     plates.Text = "plates: "..game.Players.LocalPlayer.Character.Zones.Plates.Value
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+         wait(.1)
+             plates.Text = "plates: "..game.Players.LocalPlayer.Character.Zones.Plates.Value
+         game.Players.LocalPlayer.Character:PivotTo(workspace.Areas["Cart Dealership"].Plate.Plate.CFrame * CFrame.new(0,170,0))
+       wait(3)
+      plates.Text = "plates: "..game.Players.LocalPlayer.Character.Zones.Plates.Value
+       game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+           plates.Text = "plates: "..game.Players.LocalPlayer.Character.Zones.Plates.Value
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+         wait(.1)
+      plates.Text = "plates: "..game.Players.LocalPlayer.Character.Zones.Plates.Value
+         game.Players.LocalPlayer.Character:PivotTo(workspace.Areas["gas station"].Plate.Plate.CFrame * CFrame.new(0,170,0))
+        wait(3)
+         plates.Text = "plates: "..game.Players.LocalPlayer.Character.Zones.Plates.Value
+         game.Players.LocalPlayer.Character:PivotTo(workspace.Areas["Cart God's Cathedral"].Plate.Plate.CFrame * CFrame.new(0,170,0)) 
+         wait(3)
+          plates.Text = "plates: "..game.Players.LocalPlayer.Character.Zones.Plates.Value
+
+              Rayfield:Notify({
+   Title = "plates done",
+   Content = "all "..game.Players.LocalPlayer.Character.Zones.Plates.Value.. " plates have been touched",
+   Duration = 4,
+   Image = "triangle-alert",
+})
+     plates.Text = "plates: "..game.Players.LocalPlayer.Character.Zones.Plates.Value
+float(game.Players.LocalPlayer.Character)
+      for i, v in pairs(workspace.Minitriggers:GetChildren()) do
+         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.3)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+         wait(.3)
+         game.Players.LocalPlayer.Character:PivotTo(v.CFrame)
+         wait(.3)
+          minitrigs.Text = "mini triggers: ".. game.Players.LocalPlayer.Character.Zones.Minitriggers.Value
+          plates.Text = "plates: "..game.Players.LocalPlayer.Character.Zones.Plates.Value
+      end
+ game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+              Rayfield:Notify({
+   Title = "mini triggers done",
+   Content = "all "..game.Players.LocalPlayer.Character.Zones.Minitriggers.Value.. " mini triggers have been touched",
+   Duration = 4,
+   Image = "triangle-alert",
+})
+ float(game.Players.LocalPlayer.Character)
+game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+         wait(.1)
+         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(79.61444091796875, 3.3999996185302734, -64.45508575439453))
+      local tween = tweenservice:Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(15),{CFrame = CFrame.new(-70.66719055175781, 3.40040922164917, -63.061790466308594)})
+      tween:Play()
+      tween.Completed:Wait()
+       checkpoints.Text = "checkpoints: "..game.Players.LocalPlayer.Character.Zones.Checkpoints.Value
+      game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+         wait(.1)
+         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(79.60256958007812, 3.3999991416931152, -2.374220132827759))
+      local tween = tweenservice:Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(15),{CFrame = CFrame.new(-93.69917297363281, 3.400106906890869, -1.9970427751541138)})
+      tween:Play()
+      tween.Completed:Wait()
+      checkpoints.Text = "checkpoints: "..game.Players.LocalPlayer.Character.Zones.Checkpoints.Value
+      game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+         wait(.1)
+         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-77.15917205810547, 24.600448608398438, -92.49117279052734))
+      local tween = tweenservice:Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(15),{CFrame = CFrame.new(-75.7867431640625, 24.600345611572266, -315.0025329589844)})
+      tween:Play()
+      tween.Completed:Wait()
+      checkpoints.Text = "checkpoints: "..game.Players.LocalPlayer.Character.Zones.Checkpoints.Value
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+         wait(.1)
+         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-170.5250244140625, 95.20707702636719, 279.171875))
+      local tween = tweenservice:Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(15),{CFrame = CFrame.new(-169.8574676513672, 94.67503356933594, 553.9036254882812)})
+      tween:Play()
+      tween.Completed:Wait()
+      checkpoints.Text = "checkpoints: "..game.Players.LocalPlayer.Character.Zones.Checkpoints.Value
+       game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+         wait(.1)
+         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(520.2593994140625, 227.5472412109375, 55.35612106323242))
+      local tween = tweenservice:Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(15),{CFrame = CFrame.new(519.7659912109375, 227.70761108398438, 159.26663208007812)})
+      tween:Play()
+      tween.Completed:Wait()
+    checkpoints.Text = "checkpoints: "..game.Players.LocalPlayer.Character.Zones.Checkpoints.Value
+      game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+         wait(.1)
+         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(260.44384765625, 66.24044799804688, -63.79158020019531))
+      local tween = tweenservice:Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(15),{CFrame = CFrame.new(261.3634948730469, 66.7205810546875, -155.3668670654297)})
+      tween:Play()
+      tween.Completed:Wait()
+      checkpoints.Text = "checkpoints: "..game.Players.LocalPlayer.Character.Zones.Checkpoints.Value
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+         wait(.1)
+         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(490.1686096191406, 242.22201538085938, 47.00056457519531))
+      local tween = tweenservice:Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(15),{CFrame = CFrame.new(490.411865234375, 242.22201538085938, 231.13002014160156)})
+      tween:Play()
+      tween.Completed:Wait()
+    checkpoints.Text = "checkpoints: "..game.Players.LocalPlayer.Character.Zones.Checkpoints.Value
+         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+         wait(.1)
+         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(455.5482177734375, 269.56976318359375, 341.3663024902344))
+      local tween = tweenservice:Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(15),{CFrame = CFrame.new(453.6881103515625, 270.3695068359375, 212.30703735351562)})
+      tween:Play()
+      tween.Completed:Wait()
+      checkpoints.Text = "checkpoints: "..game.Players.LocalPlayer.Character.Zones.Checkpoints.Value
+      wait(.4)
+       game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+                     Rayfield:Notify({
+   Title = "checkpoints done",
+   Content = "touched "..game.Players.LocalPlayer.Character.Zones.Checkpoints.Value.. " checkpoints have been touched",
+   Duration = 4,
+   Image = "triangle-alert",
+})
+      wait(2)
+         game.Players.LocalPlayer.Character:PivotTo(workspace.Areas["Cart God's Cathedral"].portal.Teleporter.CFrame)
+         firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, workspace.Areas["Cart God's Cathedral"].portal.Teleporter, 0)
+         textlabel.Text = "entering portal"
+                             Rayfield:Notify({
+   Title = "completed",
+   Content = "entering portal",
+   Duration = 4,
+   Image = "triangle-alert",
+})
+   end,
+})
+
+   local tpdropdown = maintab:CreateDropdown({
+   Name = "teleport",
+   Options = {"spawn","bill's batteries","cart dealership","gas station","cathedral"},
+   CurrentOption = {"none"},
+   MultipleOptions = false,
+   Callback = function(Options)
+   for i, v in Options do
+    if v == "spawn" then
+         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+         wait(.1)
+         game.Players.LocalPlayer.Character:PivotTo(workspace.Areas.Spawn.Plate.Plate.CFrame * CFrame.new(0,170,0))
+      end
+      if v == "bill's batteries" then
+       game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+         wait(.1)
+         game.Players.LocalPlayer.Character:PivotTo(workspace.Areas["Bill's batteries"].Plate.Plate.CFrame * CFrame.new(0,70,0))
+      end
+       if v == "cart dealership" then
+        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+         wait(.1)
+         game.Players.LocalPlayer.Character:PivotTo(workspace.Areas["Cart Dealership"].Plate.Plate.CFrame * CFrame.new(0,170,0))
+      end
+      if v == "gas station" then
+       game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+         wait(.1)
+         game.Players.LocalPlayer.Character:PivotTo(workspace.Areas["gas station"].Plate.Plate.CFrame * CFrame.new(0,170,0))
+      end
+       if v == "cathedral" then
+         game.Players.LocalPlayer.Character:PivotTo(workspace.Areas["Cart God's Cathedral"].Plate.Plate.CFrame * CFrame.new(0,170,0))
+      end
+   end
+   end,
+      })
+ local Divider = maintab:CreateDivider()
+ local bringbattery = maintab:CreateButton({
+   Name = "bring closest battery to dealership",
+   Callback = function()
+      if workspace.LooseItems:FindFirstChild("Car Battery") ~= nil then
+
+local closest
+local playerposition = game.Players.LocalPlayer.Character.PrimaryPart.Position
+
+for i,v in pairs(workspace.LooseItems:GetChildren()) do
+	if v.Name == "Car Battery" then
+       if closest == nil then
+		     closest = v
+      else
+		     if (playerposition - v.Main.Position).magnitude < (closest.PrimaryPart.Position - playerposition).magnitude then
+		   	closest = v
+		   end
+	   end
+   end
+end
+      print(closest)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+          wait(.1)
+          game.Players.LocalPlayer.Character:PivotTo(closest.Main.CFrame)
+          wait(.2)
+          local args = {
+	closest:WaitForChild("Main")
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
+wait(.2)
+          local weld = Instance.new("WeldConstraint")
+          weld.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+          weld.Part0 = weld.Parent
+          weld.Part1 = closest.Main
+         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(171.85922241210938, 115.29997253417969, 417.27862548828125))
+         wait(.5)
+         weld:Destroy()
+      end
+   end,
+})     
+
+local grablemon = maintab:CreateButton({
+   Name = "get lemon",
+   Callback = function()
+      if workspace.LooseItems:FindFirstChild("Lemon") ~= nil then
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+          wait(.1)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-220, -41, 104))
+          wait(.2)
+          local args = {
+	workspace:WaitForChild("LooseItems"):WaitForChild("Lemon"):WaitForChild("Lemon")
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
+
+          local weld = Instance.new("WeldConstraint")
+          weld.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+          weld.Part0 = weld.Parent
+          weld.Part1 = workspace.LooseItems.Lemon.Lemon
+          local args = {
+	workspace:WaitForChild("LooseItems"):WaitForChild("Lemon"):WaitForChild("Lemon")
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
+
+         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-207, 65, 131))
+         wait(.2)
+         weld:Destroy()
+      end
+   end,
+})
+local grabgold = maintab:CreateButton({
+   Name = "get gold",
+   Callback = function()
+      if workspace.LooseItems:FindFirstChild("gold bar") ~= nil then
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+          wait(.1)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(755, 193, 80))
+          wait(.1)
+         game.Players.LocalPlayer.Character:PivotTo(workspace.LooseItems["gold bar"].gold.CFrame)
+         wait(.2)
+         local args = {
+	workspace:WaitForChild("LooseItems"):WaitForChild("gold bar"):WaitForChild("gold")
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ResetOwnership"):FireServer(unpack(args))
+
+          local weld = Instance.new("Weld")
+          weld.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+          weld.Part0 = weld.Parent
+          weld.Part1 = workspace.LooseItems["gold bar"].gold
+                   local args = {
+	workspace:WaitForChild("LooseItems"):WaitForChild("gold bar"):WaitForChild("gold")
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ResetOwnership"):FireServer(unpack(args))
+         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(755, 197, 80))
+
+         wait(.2)
+         weld:Destroy()
+      end
+   end,
+})
+
+local muteboombox = maintab:CreateButton({
+   Name = "mute boombox",
+   Callback = function()
+     workspace.boombox.boombox.Sound:Destroy()
+   end,
+})
+
+
+end
+--qrot
+if game.PlaceId == 10693209990 then
+   local qrottab = Window:CreateTab("qrot", "frown")
+   local qrotmainsection = qrottab:CreateSection("main")
+   local Divider = qrottab:CreateDivider()
+
+   local tpbutton = qrottab:CreateButton({
+     Name = "teleport to qrot",
+     Callback = function()
+         game.Players.LocalPlayer.Character:PivotTo(workspace.Boss.QROT.PrimaryPart.CFrame) 
+      end,
+   })
+local tpkeybind = Tab:CreateKeybind({
+   Name = "tp to qrot",
+   CurrentKeybind = "V",
+   HoldToInteract = false,
+   Flag = "tptoqrotkeybind", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Keybind)
+    game.Players.LocalPlayer.Character:PivotTo(workspace.Boss.QROT.PrimaryPart.CFrame) 
+   end,
+})
+end
+
+local misctab = Window:CreateTab("misc", "grip")
+local miscmainsection = misctab:CreateSection("misc stuff")
+local Divider = misctab:CreateDivider()
+local loadinfyield = misctab:CreateButton({
+   Name = "load infinite yield",
+   Callback = function()
+         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+   end,
+})
+local loaddex = misctab:CreateButton({
+   Name = "load dex",
+   Callback = function()
+         loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
+   end,
+})
+
+--script loaded
+Rayfield:Notify({
+   Title = "script loaded",
+   Content = "the script has been loaded",
+   Duration = 3.5,
+   Image = "party-popper",
+})
