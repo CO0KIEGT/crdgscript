@@ -49,7 +49,7 @@ end
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
    Name = "crdg script 2025",
-   Icon = 125742876322018, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   Icon = 108056462207703, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
    LoadingTitle = "crdg script 2025",
    LoadingSubtitle = "by kooc",
    Theme = "Amethyst", -- Check https://docs.sirius.menu/rayfield/configuration/themes
