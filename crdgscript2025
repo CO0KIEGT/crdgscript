@@ -443,7 +443,7 @@ if game.PlaceId == 10693209990 then
          game.Players.LocalPlayer.Character:PivotTo(workspace.Boss.QROT.PrimaryPart.CFrame) 
       end,
    })
-local tpkeybind = Tab:CreateKeybind({
+local tpkeybind = qrottab:CreateKeybind({
    Name = "tp to qrot",
    CurrentKeybind = "V",
    HoldToInteract = false,
@@ -469,6 +469,40 @@ local loaddex = misctab:CreateButton({
          loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
    end,
 })
+
+if game.PlaceId = 10005552275 then
+	local rieltab = Window:CreateTab("riel", "frown")
+   local rielmainsection = qrottab:CreateSection("main")
+   local Divider = rieltab:CreateDivider()
+
+   local tpbutton = rieltab:CreateButton({
+     Name = "teleport to riel",
+     Callback = function()
+         game.Players.LocalPlayer.Character:PivotTo(workspace.Boss.RIEL.PrimaryPart.CFrame) 
+      end,
+   })
+
+local rieltoggle = rieltab:CreateToggle({
+   Name = "auto kill",
+   CurrentValue = false,
+   Flag = "rielautokill", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+  if Value == true
+		local hi; = runserv.RenderStepped:Connect(function(dt)
+game.Players.LocalPlayer.Character:PivotTo(workspace.Boss.RIEL.PrimaryPart.CFrame + workspace.Boss.RIEL.PrimaryPart.CFrame.UpVector * -5) 
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, workspace.Boss.RIEL.PrimaryPart.Position)
+local args = {
+	false
+}
+game:GetService("Players").LocalPlayer.Character:WaitForChild(""):WaitForChild("attack"):FireServer(unpack(args))
+
+end)
+	end
+else
+hi:Disconnect()
+   end,
+})
+end
 
 --script loaded
 Rayfield:Notify({
