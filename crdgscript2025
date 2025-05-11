@@ -460,6 +460,18 @@ if game.PlaceId == 10005552275 then
    local rielmainsection = rieltab:CreateSection("main")
    local Divider = rieltab:CreateDivider()
 
+
+local musicgetrid = rieltab:CreateButton({
+     Name = "get rid of fuck ass music",
+     Callback = function()
+         for i, v in pairs(game.Players.LocalPlayer.PlayerScripts.music:GetChildren()) do
+		if v.Name ~= "credits" then
+		v.Volume = 0
+		end
+	end
+      end,
+   })
+
    local tpbutton = rieltab:CreateButton({
      Name = "teleport to riel",
      Callback = function()
