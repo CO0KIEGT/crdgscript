@@ -1,7 +1,7 @@
 local tweenservice = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local rielhi
-
+local itemstable
 function randomString()
 	local length = math.random(10,20)
 	local array = {}
@@ -318,6 +318,66 @@ game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
    end,
       })
  local Divider = maintab:CreateDivider()
+
+ itemstable = {}
+    for i, v in pairs(workspace.LooseItems:GetChildren()) do
+        table.insert(itemstable,v.Name)
+    end
+
+local bringitemdropdown = maintab:CreateDropdown({
+   Name = "bring item",
+   Options = itemstable,
+   CurrentOption = {"none"},
+   MultipleOptions = false,
+   Callback = function(Options)
+   for i, v in Options do
+        local currentpos = game.Players.LocalPlayer.Character:GetPivot()
+
+         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+         wait(.4)
+          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+          wait(.1)
+          game.Players.LocalPlayer.Character:PivotTo(workspace:WaitForChild("LooseItems"):WaitForChild(v):GetPivot())
+          wait(.2)
+          local args = {
+	workspace:WaitForChild("LooseItems"):WaitForChild(v):FindFirstChildWhichIsA("BasePart")
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
+
+          local weld = Instance.new("WeldConstraint")
+          weld.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+          weld.Part0 = weld.Parent
+          weld.Part1 = workspace.LooseItems:FindFirstChild(v):FindFirstChildWhichIsA("BasePart")
+           local args = {
+	workspace:WaitForChild("LooseItems"):WaitForChild(v):FindFirstChildWhichIsA("BasePart")
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
+
+         game.Players.LocalPlayer.Character:PivotTo(currentpos)
+         wait(.2)
+         weld:Destroy()
+
+
+   end
+ end,
+      })
+
+workspace.LooseItems.ChildAdded:Connect(function(child)
+    itemstable = {}
+    for i, v in pairs(workspace.LooseItems:GetChildren()) do
+        table.insert(itemstable,v.Name)
+    end
+    bringitemdropdown:Refresh(itemstable,"Amethyst")
+end)
+
+workspace.LooseItems.ChildRemoved:Connect(function(child)
+	 itemstable = {}
+    for i, v in pairs(workspace.LooseItems:GetChildren()) do
+        table.insert(itemstable,v.Name)
+    end
+    bringitemdropdown:Refresh(itemstable,"Amethyst")
+end)
+
  local bringbattery = maintab:CreateButton({
    Name = "bring closest battery to dealership",
    Callback = function()
@@ -360,34 +420,34 @@ wait(.2)
    end,
 })     
 
-local bringanyitem = maintab:CreateButton({
-   Name = "bring lemon to gas station",
+local bringscrew = maintab:CreateButton({
+   Name = "bring screw",
    Callback = function()
-      if workspace.LooseItems:FindFirstChild("Lemon") ~= nil then
-          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
+      local currentpos = game.Players.LocalPlayer.Character:GetPivot()
+
+         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
          wait(.4)
           game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
           wait(.1)
-          game.Players.LocalPlayer.Character:PivotTo(workspace:WaitForChild("LooseItems"):WaitForChild("Lemon"):GetPivot())
+          game.Players.LocalPlayer.Character:PivotTo(workspace.screw.CFrame)
           wait(.2)
           local args = {
-	workspace:WaitForChild("LooseItems"):WaitForChild("Lemon"):WaitForChild("Lemon")
+	workspace:WaitForChild("screw")
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
 
           local weld = Instance.new("WeldConstraint")
           weld.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
           weld.Part0 = weld.Parent
-          weld.Part1 = workspace.LooseItems.Lemon.Lemon
-          local args = {
-	workspace:WaitForChild("LooseItems"):WaitForChild("Lemon"):WaitForChild("Lemon")
+          weld.Part1 = workspace:FindFirstChild("screw")
+           local args = {
+	workspace:WaitForChild("screw")
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
 
-         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(755, 193, 80))
+         game.Players.LocalPlayer.Character:PivotTo(currentpos)
          wait(.2)
          weld:Destroy()
-      end
    end,
 })
 
