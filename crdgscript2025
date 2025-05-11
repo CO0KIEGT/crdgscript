@@ -425,8 +425,7 @@ game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Reset
 local muteboombox = maintab:CreateButton({
    Name = "mute boombox",
    Callback = function()
-     workspace.boombox.boombox.Sound:Destroy()
-	game.Players.LocalPlayers.PlayerScripts.ClientEffects.Boombox:Destroy()
+     workspace.boombox.boombox.Sound.Playing = false
    end,
 })
 
