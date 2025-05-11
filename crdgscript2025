@@ -327,7 +327,7 @@ local closest
 local playerposition = game.Players.LocalPlayer.Character.PrimaryPart.Position
 
 for i,v in pairs(workspace.LooseItems:GetChildren()) do
-	if v.Name == "Car Battery" then
+	if v.Name == "Car Battery" and v:FindFirstChild("Main") ~- nil then
        if closest == nil then
 		     closest = v
       else
