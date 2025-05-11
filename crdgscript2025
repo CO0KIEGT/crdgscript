@@ -472,7 +472,7 @@ local musicgetrid = rieltab:CreateButton({
       end,
    })
 
-local soundlounder = rieltab:CreateButton({
+local soundlounde = rieltab:CreateButton({
      Name = "make dmg sound louder",
      Callback = function()
           game.ReplicatedStorage.hitsound.Volume = 10
