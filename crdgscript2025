@@ -455,22 +455,6 @@ local tpkeybind = qrottab:CreateKeybind({
 })
 end
 
-local misctab = Window:CreateTab("misc", "grip")
-local miscmainsection = misctab:CreateSection("misc stuff")
-local Divider = misctab:CreateDivider()
-local loadinfyield = misctab:CreateButton({
-   Name = "load infinite yield",
-   Callback = function()
-         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-   end,
-})
-local loaddex = misctab:CreateButton({
-   Name = "load dex",
-   Callback = function()
-         loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
-   end,
-})
-
 if game.PlaceId == 10005552275 then
 	local rieltab = Window:CreateTab("riel", "frown")
    local rielmainsection = rieltab:CreateSection("main")
@@ -504,6 +488,23 @@ end)
    end,
 })
 end
+
+local misctab = Window:CreateTab("misc", "grip")
+local miscmainsection = misctab:CreateSection("misc stuff")
+local Divider = misctab:CreateDivider()
+local loadinfyield = misctab:CreateButton({
+   Name = "load infinite yield",
+   Callback = function()
+         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+   end,
+})
+local loaddex = misctab:CreateButton({
+   Name = "load dex",
+   Callback = function()
+         loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
+   end,
+})
+
 
 --script loaded
 Rayfield:Notify({
