@@ -1,8 +1,11 @@
-
+local plr = game.Players.LocalPlayer
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local char = plr.Character
 local tweenservice = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local rielhi
 local itemstable
+local experimental = true
 function randomString()
 	local length = math.random(10,20)
 	local array = {}
@@ -99,30 +102,40 @@ if game.PlaceId == 7715234692 then
    local Divider = trolltab:CreateDivider()
    local Label = trolltab:CreateLabel("ts is so tuff","smile-plus")
 
+if experimental == true and plr.UserId == 1619999473 or plr.UserId == 1418570886 then
     local experimentaltab = Window:CreateTab("experimental", "siren")
    local itemitemsection = experimentaltab:CreateSection("main")
 
     local bringitemnotp = experimentaltab:CreateButton({
    Name = "bring screw (no tp)",
    Callback = function()
+   workspace.Camera.CameraType = Enum.CameraType.Scriptable
+   local oldspeed = char.Humanoid.WalkSpeed
+   char.Humanoid.WalkSpeed = 0
       local currentpos = game.Players.LocalPlayer.Character:GetPivot()
-      game.Players.LocalPlayer.Character:PivotTo(workspace.screw.CFrame)
+      local locationtotp = currentpos + char.HumanoidRootPart.CFrame.LookVector * 3
+      game.Players.LocalPlayer.Character:PivotTo(workspace.screw.CFrame * CFrame.new(0,5,0))
           wait(.3)
           local args = {
 	workspace:WaitForChild("screw")
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
-          workspace:FindFirstChild("screw").CFrame = currentpos
+          workspace:FindFirstChild("screw").CFrame = locationtotp
 
            local args = {
 	workspace:WaitForChild("screw")
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
    game.Players.LocalPlayer.Character:PivotTo(currentpos)
+   char.Humanoid.WalkSpeed = oldspeed
+   workspace.Camera.CameraType = Enum.CameraType.Custom
+   wait()
+      char.Humanoid:ChangeState(8)
    end,
 })
 
    local Divider = experimentaltab:CreateDivider()
+end
    
 
    local autobeatgame = maintab:CreateButton({
@@ -382,27 +395,30 @@ local bringitemdropdown = itemstab:CreateDropdown({
          wait(.4)
           game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
           wait(.3)
-          game.Players.LocalPlayer.Character:PivotTo(workspace:WaitForChild("LooseItems"):WaitForChild(v):GetPivot())
-          wait(.2)
+          for ii, vv in pairs(workspace.LooseItems:GetChildren()) do
+              if ii == i then
+                  game.Players.LocalPlayer.Character:PivotTo(vv:GetPivot())
+                  wait(.2)
           local args = {
-	workspace:WaitForChild("LooseItems"):WaitForChild(v):FindFirstChildWhichIsA("BasePart")
+	vv:FindFirstChildWhichIsA("BasePart")
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
 
           local weld = Instance.new("WeldConstraint")
           weld.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
           weld.Part0 = weld.Parent
-          weld.Part1 = workspace.LooseItems:FindFirstChild(v):FindFirstChildWhichIsA("BasePart")
+          weld.Part1 = vv
            local args = {
-	workspace:WaitForChild("LooseItems"):WaitForChild(v):FindFirstChildWhichIsA("BasePart")
+	vv:FindFirstChildWhichIsA("BasePart")
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
 
          game.Players.LocalPlayer.Character:PivotTo(currentpos)
          wait(.2)
          weld:Destroy()
-
-
+         break
+              end
+          end
    end
  end,
       })
