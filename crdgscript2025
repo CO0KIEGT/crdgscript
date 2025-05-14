@@ -55,7 +55,7 @@ local Window = Rayfield:CreateWindow({
    Name = "crdg script 2025",
    Icon = 108056462207703, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
    LoadingTitle = "crdg script 2025",
-   LoadingSubtitle = "by kooc",
+   LoadingSubtitle = "by fortniteballs2016",
    Theme = "Amethyst", -- Check https://docs.sirius.menu/rayfield/configuration/themes
 
    DisableRayfieldPrompts = true,
@@ -106,37 +106,15 @@ if experimental == true and plr.UserId == 1619999473 or plr.UserId == 1418570886
     local experimentaltab = Window:CreateTab("experimental", "siren")
    local itemitemsection = experimentaltab:CreateSection("main")
 
-    local bringitemnotp = experimentaltab:CreateButton({
-   Name = "bring screw (no tp)",
-   Callback = function()
-   workspace.Camera.CameraType = Enum.CameraType.Scriptable
-   local oldspeed = char.Humanoid.WalkSpeed
-   char.Humanoid.WalkSpeed = 0
-      local currentpos = game.Players.LocalPlayer.Character:GetPivot()
-      local locationtotp = currentpos + char.HumanoidRootPart.CFrame.LookVector * 3
-      game.Players.LocalPlayer.Character:PivotTo(workspace.screw.CFrame * CFrame.new(0,5,0))
-          wait(.3)
-          local args = {
-	workspace:WaitForChild("screw")
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
-          workspace:FindFirstChild("screw").CFrame = locationtotp
-
-           local args = {
-	workspace:WaitForChild("screw")
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
-   game.Players.LocalPlayer.Character:PivotTo(currentpos)
-   char.Humanoid.WalkSpeed = oldspeed
-   workspace.Camera.CameraType = Enum.CameraType.Custom
-   wait()
-      char.Humanoid:ChangeState(8)
-   end,
-})
-
    local Divider = experimentaltab:CreateDivider()
 end
    
+   local muteboombox = trolltab:CreateButton({
+   Name = "fling jerry can to nearest player",
+   Callback = function()
+     workspace.boombox.boombox.Sound.Playing = false
+   end,
+})
 
    local autobeatgame = maintab:CreateButton({
    Name = "complete game",
@@ -369,10 +347,6 @@ game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
       })
  local Divider = maintab:CreateDivider()
 
- itemstable = {}
-    for i, v in pairs(workspace.LooseItems:GetChildren()) do
-        table.insert(itemstable,v.Name)
-    end
 
 local muteboombox = maintab:CreateButton({
    Name = "mute boombox",
@@ -381,6 +355,13 @@ local muteboombox = maintab:CreateButton({
    end,
 })
 
+local currenti
+local currentoptio
+
+itemstable = {}
+    for i, v in pairs(workspace.LooseItems:GetChildren()) do
+        table.insert(itemstable,v.Name)
+    end
 
 local bringitemdropdown = itemstab:CreateDropdown({
    Name = "bring item",
@@ -388,39 +369,45 @@ local bringitemdropdown = itemstab:CreateDropdown({
    CurrentOption = {"none"},
    MultipleOptions = false,
    Callback = function(Options)
-   for i, v in Options do
-        local currentpos = game.Players.LocalPlayer.Character:GetPivot()
 
-         game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
-         wait(.4)
-          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
+          for i, v in pairs(Options) do
+           currentoptio = v
+         end
+         for i, v in pairs(itemstable) do
+            if v == currentoptio then
+               currenti = i
+            end
+         end
+
+         for i , v in pairs(workspace.LooseItems:GetChildren()) do
+            if i == currenti then
+            
+            workspace.Camera.CameraType = Enum.CameraType.Scriptable
+   local oldspeed = char.Humanoid.WalkSpeed
+   char.Humanoid.WalkSpeed = 0
+      local currentpos = game.Players.LocalPlayer.Character:GetPivot()
+      local locationtotp = currentpos + char.HumanoidRootPart.CFrame.LookVector * 3
+      game.Players.LocalPlayer.Character:PivotTo(v:FindFirstChildWhichIsA("BasePart").CFrame * CFrame.new(0,5,0))
           wait(.3)
-          for ii, vv in pairs(workspace.LooseItems:GetChildren()) do
-              if ii == i then
-                  game.Players.LocalPlayer.Character:PivotTo(vv:GetPivot())
-                  wait(.2)
           local args = {
-	vv:FindFirstChildWhichIsA("BasePart")
+	v:FindFirstChildWhichIsA("BasePart")
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
+         v:FindFirstChildWhichIsA("BasePart").CFrame = locationtotp
 
-          local weld = Instance.new("WeldConstraint")
-          weld.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
-          weld.Part0 = weld.Parent
-          weld.Part1 = vv
            local args = {
-	vv:FindFirstChildWhichIsA("BasePart")
+	v:FindFirstChildWhichIsA("BasePart")
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
+   game.Players.LocalPlayer.Character:PivotTo(currentpos)
+   char.Humanoid.WalkSpeed = oldspeed
+   workspace.Camera.CameraType = Enum.CameraType.Custom
+   wait()
+      char.Humanoid:ChangeState(8)
 
-         game.Players.LocalPlayer.Character:PivotTo(currentpos)
-         wait(.2)
-         weld:Destroy()
-         break
-              end
-          end
-   end
- end,
+         end
+         end
+    end,
       })
 
 workspace.LooseItems.ChildAdded:Connect(function(child)
