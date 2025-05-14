@@ -1,3 +1,4 @@
+
 local tweenservice = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local rielhi
@@ -91,7 +92,39 @@ if game.PlaceId == 7715234692 then
  local itemstab = Window:CreateTab("items", "cuboid")
    local itemitemsection = itemstab:CreateSection("main")
    local Divider = itemstab:CreateDivider()
+   local Label = itemstab:CreateLabel("this gui is still a wip so expect bugs","siren")
+
+   local trolltab = Window:CreateTab("troll", "laugh")
+   local trollmainsection = trolltab:CreateSection("main")
+   local Divider = trolltab:CreateDivider()
+   local Label = trolltab:CreateLabel("ts is so tuff","smile-plus")
+
+    local experimentaltab = Window:CreateTab("experimental", "siren")
+   local itemitemsection = experimentaltab:CreateSection("main")
+
+    local bringitemnotp = experimentaltab:CreateButton({
+   Name = "bring screw (no tp)",
+   Callback = function()
+      local currentpos = game.Players.LocalPlayer.Character:GetPivot()
+      game.Players.LocalPlayer.Character:PivotTo(workspace.screw.CFrame)
+          wait(.3)
+          local args = {
+	workspace:WaitForChild("screw")
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
+          workspace:FindFirstChild("screw").CFrame = currentpos
+
+           local args = {
+	workspace:WaitForChild("screw")
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClientRequestOwnership"):FireServer(unpack(args))
+   game.Players.LocalPlayer.Character:PivotTo(currentpos)
+   end,
+})
+
+   local Divider = experimentaltab:CreateDivider()
    
+
    local autobeatgame = maintab:CreateButton({
    Name = "complete game",
    Callback = function()
@@ -348,7 +381,7 @@ local bringitemdropdown = itemstab:CreateDropdown({
          game.Players.LocalPlayer.Character:PivotTo(CFrame.new(354, 325, -353))
          wait(.4)
           game.Players.LocalPlayer.Character:PivotTo(CFrame.new(-183, 65, 87))
-          wait(.1)
+          wait(.3)
           game.Players.LocalPlayer.Character:PivotTo(workspace:WaitForChild("LooseItems"):WaitForChild(v):GetPivot())
           wait(.2)
           local args = {
@@ -624,7 +657,18 @@ local loaddex = misctab:CreateButton({
          loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
    end,
 })
-
+local loadrspy = misctab:CreateButton({
+   Name = "load remote spy",
+   Callback = function()
+         loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/SimpleSpyV3/main.lua"))()
+   end,
+})
+local loadalogger = misctab:CreateButton({
+   Name = "audio logger",
+   Callback = function()
+         loadstring(game:HttpGet(('https://raw.githubusercontent.com/infyiff/backup/main/audiologger.lua'),true))()
+   end,
+})
 
 --script loaded
 Rayfield:Notify({
